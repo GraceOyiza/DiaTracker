@@ -2,13 +2,15 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { signup } from '../services/request';
 import { REGISTER_USER } from '../actions/types'
 
-const initialState = {};
+const initialState = {
+  user: {}
+};
 
-export const incrementAsync = createAsyncThunk(
+export const register = createAsyncThunk(
   REGISTER_USER,
   async (formData) => {
     const response = await signup(formData);
-    return response.data;
+    return response;
   }
 );
 
@@ -28,6 +30,12 @@ export const userSlice = createSlice({
   //     state.value += action.payload;
   //   },
   // }
+  extraReducers: (builder) => {
+    builder
+      .addCase(register.fulfilled, (state, { payload }) => {
+        state.user = payload;
+      });
+  },
 });
 
 // export const { increment, decrement, incrementByAmount } = userSlice.actions;
@@ -35,7 +43,7 @@ export const userSlice = createSlice({
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
-export const selectUser = (state) => state;
+export const selectUser = (state) => state.user;
 
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.

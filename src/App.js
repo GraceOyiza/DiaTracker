@@ -1,5 +1,8 @@
 import React from 'react';
 import { Counter } from './features/counter/Counter';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import './App.css';
 
 function App() {
@@ -49,6 +52,7 @@ function App() {
           </a>
         </span>
       </header>
+      < ToastContainer />
     </div>
   );
 }

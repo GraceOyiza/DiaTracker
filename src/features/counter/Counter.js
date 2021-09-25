@@ -8,7 +8,16 @@ import {
   incrementIfOdd,
   selectCount,
 } from './counterSlice';
+import { register } from '../../reducers/userSlice'
 import styles from './Counter.module.css';
+
+const fd = {
+  "first_name": "graace",
+  "last_name": "Popoola",
+  "email": "graazaceqm@grace.com",
+  "password": "password",
+  "username": "oyziwaazaq"
+}
 
 export function Counter() {
   const count = useSelector(selectCount);
@@ -60,6 +69,12 @@ export function Counter() {
           onClick={() => dispatch(incrementIfOdd(incrementValue))}
         >
           Add If Odd
+        </button>
+        <button
+          className={styles.button}
+          onClick={() => dispatch(register(fd))}
+        >
+          Register
         </button>
       </div>
     </div>

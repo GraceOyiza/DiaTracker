@@ -1,1 +1,2 @@
 export const getHeaders = () => localStorage.getItem('diatrack') ? JSON.parse(localStorage.getItem('diatrack')) : null
+export const setHeaders = (data) => localStorage.setItem('diatrack', JSON.stringify(data))
