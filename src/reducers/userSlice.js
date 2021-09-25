@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { signup } from '../services/request';
-import { REGISTER_USER } from '../actions/types'
+import { signup, signIn } from '../services/request';
+import { REGISTER_USER, LOGIN_USER } from '../actions/types'
 
 const initialState = {
   user: {}
@@ -10,6 +10,14 @@ export const register = createAsyncThunk(
   REGISTER_USER,
   async (formData) => {
     const response = await signup(formData);
+    return response;
+  }
+);
+
+export const login = createAsyncThunk(
+  LOGIN_USER,
+  async (formData) => {
+    const response = await signIn(formData);
     return response;
   }
 );
@@ -34,8 +42,12 @@ export const userSlice = createSlice({
     builder
       .addCase(register.fulfilled, (state, { payload }) => {
         state.user = payload;
+      })
+      .addCase(login.fulfilled, (state, { payload }) => {
+        state.user = payload;
       });
   },
+  
 });
 
 // export const { increment, decrement, incrementByAmount } = userSlice.actions;

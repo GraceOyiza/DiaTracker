@@ -8,7 +8,7 @@ import {
   incrementIfOdd,
   selectCount,
 } from './counterSlice';
-import { register } from '../../reducers/userSlice'
+import { register, login } from '../../reducers/userSlice'
 import styles from './Counter.module.css';
 
 const fd = {
@@ -17,6 +17,11 @@ const fd = {
   "email": "graazaceqm@grace.com",
   "password": "password",
   "username": "oyziwaazaq"
+}
+
+const lg = {
+  "email": "graazaceqm@grmace.com",
+  "password": "password",
 }
 
 export function Counter() {
@@ -75,6 +80,12 @@ export function Counter() {
           onClick={() => dispatch(register(fd))}
         >
           Register
+        </button>
+        <button
+          className={styles.button}
+          onClick={() => dispatch(login(lg))}
+        >
+          Login
         </button>
       </div>
     </div>

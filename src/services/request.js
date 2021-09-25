@@ -26,11 +26,18 @@ instance.interceptors.request.use(
 );
 
 const handleError = error => {
-  console.log( error.response.data)
   if (error?.response?.status === 401 || error?.response?.status === 422) {
     error.response.data.errors.full_messages.forEach(msg => {console.log(msg);toast.error(msg)});
   } else {
-    toast.error('Server error. Plaease try again later');
+    toast.error('Server error. Please try again later');
+  }
+};
+
+const loginHandleError = error => {
+  if (error?.response?.status === 401 || error?.response?.status === 422) {
+    error.response.data.errors.forEach(msg => {console.log(msg);toast.error(msg)});
+  } else {
+    toast.error('Server error. Please try again later');
   }
 };
 
@@ -46,5 +53,15 @@ export const signup = async (formData) => {
     return res.data.data;
   } catch (error) {
     handleError(error)
+  }
+}
+
+export const signIn = async (formData) => {
+  try {
+    const res = await postRequest(`${baseApi}/auth/sign_in`, formData)
+    setHeaders(res.headers)
+    return res.data.data;
+  } catch (error) {
+    loginHandleError(error)
   }
 }
