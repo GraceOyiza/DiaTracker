@@ -1,10 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { Provider } from 'react-redux';
 import App from './App';
 import { store } from './store';
-import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
+
+// import 'jquery';
+// import 'popper.js';
+// import 'bootstrap/dist/js/bootstrap.bundle.min';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
+import './styles/index.scss';
 
 ReactDOM.render(
   <React.StrictMode>

@@ -112,7 +112,6 @@ export const addMeasure = async (formData) => {
 export const addMeasurement = async (formData, id) => {
   try {
     const res = await postRequest(`${baseApi}/measures/${id}/new`, formData)
-    console.log(res, 'Add measurement')
     return res.data;
   } catch (error) {
     loginHandleError(error)
