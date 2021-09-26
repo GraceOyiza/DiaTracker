@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { signup, signIn } from '../services/request';
-import { REGISTER_USER, LOGIN_USER } from '../actions/types'
+import { signup, signIn, logOut } from '../services/request';
+import { REGISTER_USER, LOGIN_USER, LOGOUT_USER } from '../actions/types'
 
 const initialState = {
   user: {}
@@ -19,6 +19,14 @@ export const login = createAsyncThunk(
   async (formData) => {
     const response = await signIn(formData);
     return response;
+  }
+);
+
+export const logout = createAsyncThunk(
+  LOGOUT_USER,
+  async () => {
+    await logOut();
+    return {};
   }
 );
 
@@ -44,6 +52,9 @@ export const userSlice = createSlice({
         state.user = payload;
       })
       .addCase(login.fulfilled, (state, { payload }) => {
+        state.user = payload;
+      })
+      .addCase(logout.fulfilled, (state, { payload }) => {
         state.user = payload;
       });
   },

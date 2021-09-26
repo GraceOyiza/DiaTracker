@@ -2,7 +2,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 import { baseApi } from './constants';
-import { getHeaders, setHeaders } from './common';
+import { getHeaders, setHeaders, clearHeaders } from './common';
 
 const instance = axios.create({
   baseURL: baseApi,
@@ -63,5 +63,17 @@ export const signIn = async (formData) => {
     return res.data.data;
   } catch (error) {
     loginHandleError(error)
+  }
+}
+
+export const logOut = async () => {
+  try {
+    // await instance.delete(`${baseApi}/auth/sign_out`);
+    toast.success('You have successfully logged out');
+    clearHeaders();
+  } catch (error) {
+    console.log(error, error.response.data.errors.full_messages)
+    error.status = 500;
+    loginHandleError(['An error ocurred'])
   }
 }
