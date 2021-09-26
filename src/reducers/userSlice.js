@@ -6,7 +6,7 @@ const initialState = {
   user: {}
 };
 
-export const register = createAsyncThunk(
+export const registerUser = createAsyncThunk(
   REGISTER_USER,
   async (formData) => {
     const response = await signup(formData);
@@ -48,7 +48,7 @@ export const userSlice = createSlice({
   // }
   extraReducers: (builder) => {
     builder
-      .addCase(register.fulfilled, (state, { payload }) => {
+      .addCase(registerUser.fulfilled, (state, { payload }) => {
         state.user = payload;
       })
       .addCase(login.fulfilled, (state, { payload }) => {
