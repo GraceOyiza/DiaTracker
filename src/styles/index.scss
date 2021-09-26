@@ -1,3 +1,8 @@
 @import '~bootstrap/scss/bootstrap.scss';
 @import './Homepage.scss';
 @import './Register.scss';
+
+.measurements {
+  max-width: 500px;
+  margin: auto;
+}
