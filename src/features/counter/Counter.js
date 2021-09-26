@@ -8,7 +8,8 @@ import {
   incrementIfOdd,
   selectCount,
 } from './counterSlice';
-import { register, login, logout } from '../../reducers/userSlice'
+import { register, login, logout } from '../../reducers/userSlice';
+import { getReadings, getReading, createMeasure, createMeasurement } from '../../reducers/readingSlice';
 import styles from './Counter.module.css';
 
 const fd = {
@@ -22,6 +23,11 @@ const fd = {
 const lg = {
   "email": "graazaceqm@grace.com",
   "password": "password",
+}
+
+const lpo = {
+  formData: {value: 200.5, date: new Date()},
+  id: 2
 }
 
 export function Counter() {
@@ -92,6 +98,30 @@ export function Counter() {
           onClick={() => dispatch(logout())}
         >
           Logout
+        </button>
+        <button
+          className={styles.button}
+          onClick={() => dispatch(getReadings())}
+        >
+          Get all Measure
+        </button>
+        <button
+          className={styles.button}
+          onClick={() => dispatch(getReading())}
+        >
+          Get One Measure
+        </button>
+        <button
+          className={styles.button}
+          onClick={() => dispatch(createMeasure({title: 'Test'}))}
+        >
+          Create Measure
+        </button>
+        <button
+          className={styles.button}
+          onClick={() => dispatch(createMeasurement(lpo))}
+        >
+          Create Measurement
         </button>
       </div>
     </div>

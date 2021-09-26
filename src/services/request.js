@@ -6,6 +6,9 @@ import { getHeaders, setHeaders, clearHeaders } from './common';
 
 const instance = axios.create({
   baseURL: baseApi,
+  headers: {
+    'Content-Type': 'application/json',
+  }
 });
 
 instance.interceptors.request.use(
@@ -15,10 +18,11 @@ instance.interceptors.request.use(
       const {
         authorization, uid, client, tokenType,
       } = header;
-      config.headers['access-token'] = authorization;
-      config.headers.uid = uid;
-      config.headers.client = client;
-      config.headers['token-type'] = tokenType;
+      config.headers['access-token'] = authorization || '';
+      config.headers.uid = uid || '';
+      config.headers.client = client || '';
+      config.headers['token-type'] = tokenType || '';
+      console.log('Instance', config)
     }
     return config;
   },
@@ -27,7 +31,7 @@ instance.interceptors.request.use(
 
 const handleError = error => {
   if (error?.response?.status === 401 || error?.response?.status === 422) {
-    error.response.data.errors.full_messages.forEach(msg => {console.log(msg);toast.error(msg)});
+    error.response.data.errors.full_messages.forEach(msg => {toast.error(msg)});
   } else {
     toast.error('Server error. Please try again later');
   }
@@ -75,5 +79,42 @@ export const logOut = async () => {
     console.log(error, error.response.data.errors.full_messages)
     error.status = 500;
     loginHandleError(['An error ocurred'])
+  }
+}
+
+export const fetchMeasurements = async () => {
+  try {
+    const res = await instance.get(`${baseApi}/measures`)
+    return res.data;
+  } catch (error) {
+    loginHandleError(error)
+  }
+}
+
+export const fetchMeasurement = async (id = 2) => {
+  try {
+    const res = await instance.get(`${baseApi}/measures/${id}`)
+    return res.data;
+  } catch (error) {
+    loginHandleError(error)
+  }
+}
+
+export const addMeasure = async (formData) => {
+  try {
+    const res = await postRequest(`${baseApi}/measures`, formData)
+    return res.data;
+  } catch (error) {
+    loginHandleError(error)
+  }
+}
+
+export const addMeasurement = async (formData, id) => {
+  try {
+    const res = await postRequest(`${baseApi}/measures/${id}/new`, formData)
+    console.log(res, 'Add measurement')
+    return res.data;
+  } catch (error) {
+    loginHandleError(error)
   }
 }

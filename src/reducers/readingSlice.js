@@ -1,24 +1,41 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { signup, signIn } from '../services/request';
-import { SET_READING, SET_READINGS } from '../actions/types'
+import { fetchMeasurement, fetchMeasurements, addMeasure, addMeasurement } from '../services/request';
+import { SET_READING, SET_READINGS, CREATE_READING } from '../actions/types'
 
 const initialState = {
-  reading: {},
-  readings: []
+  measurement: {},
+  measurements: []
 };
 
 export const getReading = createAsyncThunk(
   SET_READING,
-  async (formData) => {
-    const response = await signup(formData);
+  async (id) => {
+    const response = await fetchMeasurement(id);
     return response;
   }
 );
 
 export const getReadings = createAsyncThunk(
   SET_READINGS,
+  async () => {
+    const response = await fetchMeasurements();
+    return response;
+  }
+);
+
+export const createMeasure = createAsyncThunk(
+  CREATE_READING,
   async (formData) => {
-    const response = await signIn(formData);
+    const response = await addMeasure(formData);
+    return response;
+  }
+);
+
+export const createMeasurement = createAsyncThunk(
+  CREATE_READING,
+  async (data) => {
+    const { formData, id } = data;
+    const response = await addMeasurement(formData, id);
     return response;
   }
 );
@@ -29,10 +46,13 @@ export const measurementSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getReading.fulfilled, (state, { payload }) => {
-        state.reading = payload;
+        state.measurement = payload;
       })
       .addCase(getReadings.fulfilled, (state, { payload }) => {
-        state.readings = payload;
+        state.measurements = payload;
+      })
+      .addCase(createMeasure.fulfilled, (state, { payload }) => {
+        state.measurements = payload;
       });
   },
   
