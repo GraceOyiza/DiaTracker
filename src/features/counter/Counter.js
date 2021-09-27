@@ -113,7 +113,7 @@ export function Counter() {
         </button>
         <button
           className={styles.button}
-          onClick={() => dispatch(createMeasure({title: 'Test'}))}
+          onClick={() => dispatch(createMeasure({title: 'Test', unit: 'lbs', goal: 250}))}
         >
           Create Measure
         </button>
