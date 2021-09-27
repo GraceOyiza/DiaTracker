@@ -20,6 +20,12 @@
   }
 }
 
+.tabs {
+  background-color: $light-gray;
+  height: calc(100vh - 140px);
+  overflow-y: auto;
+}
+
 .tab {
   .tab-title {
     background-color: $light-gray;
@@ -33,5 +39,9 @@
 
   .circle-range {
     max-width: 40px;
+  }
+
+  .tab-content {
+    background-color: $white;
   }
 }

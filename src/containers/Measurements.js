@@ -8,7 +8,15 @@ const Measurements = () => {
   return (
     <div className="measurements">
       <Header clickHandler={addIconHandle} />
-      <Tab />
+      <div className="tabs">
+        <Tab />       
+        <Tab />       
+        <Tab />       
+        <Tab />       
+        <Tab />       
+        <Tab />       
+        <Tab />       
+      </div>
     </div>
   )
 }
