@@ -1,6 +1,4 @@
-
 import TabInfo from './TabInfo';
-
 
 const Tab = () => {
   return (

@@ -20,7 +20,8 @@
   }
 }
 
-.tabs {
+.tabs,
+.measurement {
   background-color: $light-gray;
   height: calc(100vh - 140px);
   overflow-y: auto;
@@ -44,4 +45,22 @@
   .tab-content {
     background-color: $white;
   }
+}
+
+.charts {
+  max-width: 70px;
+  margin-left: auto;
+}
+
+.measurement-heading {
+  background-color: $white;
+}
+
+.unit {
+  color: $dark-gray;
+  font-size: 12px;
+}
+
+.measurement__card {
+  background-color: $white;
 }

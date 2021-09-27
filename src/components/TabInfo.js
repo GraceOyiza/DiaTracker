@@ -10,15 +10,15 @@ const TabInfo = () => {
     <div className="d-flex align-items-center justify-content-between px-4 py-3 tab-content">
         <div className="d-flex align-items-center">
           <div className="circle-range me-2">
-          <CircularProgressbar
-        value={60}
-        strokeWidth={3}
-        styles={buildStyles({
-          textColor: "red",
-          pathColor: "turquoise",
-          trailColor: "gold"
-        })}
-      />
+            <CircularProgressbar
+              value={60}
+              strokeWidth={3}
+              styles={buildStyles({
+                textColor: "red",
+                pathColor: "turquoise",
+                trailColor: "gold"
+              })}
+            />
           </div>
           <div className="d-flex flex-column justify-content-between measure-info">
             <h4 className="date">Sept 5 2013</h4>
