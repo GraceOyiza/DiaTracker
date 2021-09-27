@@ -51,23 +51,15 @@ export const postRequest = async (url, body) => {
 };
 
 export const signup = async (formData) => {
-  try {
     const res = await postRequest(`${baseApi}/auth`, formData)
     setHeaders(res.headers)
     return res.data.data;
-  } catch (error) {
-    handleError(error)
-  }
 }
 
 export const signIn = async (formData) => {
-  try {
     const res = await postRequest(`${baseApi}/auth/sign_in`, formData)
     setHeaders(res.headers)
     return res.data.data;
-  } catch (error) {
-    loginHandleError(error)
-  }
 }
 
 export const logOut = async () => {

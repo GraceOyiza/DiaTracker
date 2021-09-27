@@ -4,7 +4,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import FormContainer from './FormContainer';
 import Form from '../components/Form';
-import { login  } from '../reducers/userSlice';
+import { loginSuccess  } from '../reducers/userSlice';
+import { signIn  } from '../services/request';
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+import { useHistory } from 'react-router';
 
 const schema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Email is required'),
@@ -12,6 +16,8 @@ const schema = yup.object().shape({
 });
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
     mode: 'onBlur',
@@ -24,7 +30,13 @@ const Login = () => {
 
     userData.append('email', email);
     userData.append('password', password);
-    login(userData);
+    try {
+      const res = await signIn(userData);
+      dispatch(loginSuccess(res))
+      history.push('/dashboard');
+    } catch (error) {
+      error.response.data.errors.forEach(msg => toast.error(msg));
+    }
   };
   return (
     <FormContainer title="Login">

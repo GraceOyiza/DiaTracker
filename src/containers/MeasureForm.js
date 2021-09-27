@@ -2,9 +2,9 @@ import React from 'react';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import FormContainer from '../containers/FormContainer';
+import FormContainer from './FormContainer';
 import Form from '../components/Form';
-import { login  } from '../reducers/userSlice';
+// import { login  } from '../reducers/userSlice';
 
 const schema = yup.object().shape({
   title: yup.string().required('Title is required'),
@@ -26,7 +26,7 @@ const MeasureForm = () => {
     userData.append('title', title);
     userData.append('goal', goal);
     userData.append('unit', unit);
-    login(userData);
+    // login(userData);
   };
   return (
     <div className="measure__form">
@@ -47,7 +47,7 @@ const MeasureForm = () => {
           <input { ...register("unit") } type="text" className="form-control" id="unit" name="unit" />
           <small className="text-danger">{errors?.unit?.message}</small>
         </div>
-        <button type="submit" className="btn btn-primary">Submit</button>
+        <button type="submit" className="btn btn-primary mt-4">Submit</button>
       </Form>
     </FormContainer>
     </div>

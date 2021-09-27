@@ -1,14 +1,17 @@
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useHistory } from 'react-router-dom';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 
 import DefaultUserImage from '../assets/user.png';
 import FormContainer from './FormContainer';
 import Form from '../components/Form';
-import { registerUser } from '../reducers/userSlice';
+import { registerSuccess } from '../reducers/userSlice';
+import { signup } from '../services/request';
+import { clearHeaders } from '../services/common';
+
 
 
 const SUPPORTED_FORMATS = ['image/jpg',
@@ -55,7 +58,7 @@ const schema = yup.object().shape({
 });
 
 const Register = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const history = useHistory();
   const { handleSubmit, register, formState: { errors }  } = useForm({
     resolver: yupResolver(schema),
@@ -83,13 +86,23 @@ const Register = () => {
 
       const imgFile = await dataUrlToFile(DefaultUserImage, 'defaultImage');
       if (!image[0]) {
-        userData.append('image', imgFile);
+        userData.append('avatar', imgFile);
       } else {
-        userData.append('image', image[0]);
+        userData.append('avatar', image[0]);
       }
-      registerUser(userData)
-      // history.push('/dashboard');
-      toast.success('Account created successfully');
+      try {
+        const res = await signup(userData);
+        dispatch(registerSuccess(res))
+        history.push('/dashboard');
+        toast.success('Account created successfully');
+      } catch (error) {
+        clearHeaders();
+        if (error.response.status === 422) {
+          error.response.data.errors.full_messages.forEach(msg => toast.error(msg));
+        } else {
+          toast.error('Server error. Please try again later');
+        }
+      } 
   };
 
   return (
