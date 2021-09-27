@@ -7,6 +7,7 @@ import Register from './containers/Register';
 import Login from './containers/Login';
 import Dashboard from './containers/Measurements';
 import Measurement from './containers/Measurement';
+import MeasureForm from './components/MeasureForm'
 import 'react-toastify/dist/ReactToastify.css';
 
 import './App.css';
@@ -21,6 +22,7 @@ function App() {
         <Route exact path="/login" component={Login} />
         <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="/measurements/:id" component={Measurement} />
+        <Route exact path="/measurements/categories/new" component={MeasureForm} />
       </Switch>
     </Router>
   );

@@ -74,3 +74,17 @@
     }
   }
 }
+
+.measure__form {
+  max-width: 420px;
+  margin: auto;
+  
+  .form-container__image,
+  .form__footer {
+    display: none;
+  }
+
+  .form__wrapper {
+    width: 100%;
+  }
+}

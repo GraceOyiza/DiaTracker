@@ -9,7 +9,7 @@ function FormContainer({ title, children }) {
       <div className="row mx-0 form-container__wrapper">
         <div className="col-sm-0 col-md-4 col-lg-5 form-container__image" style={{ backgroundImage: `url(${FormImage})` }} />
 
-        <div className="col-sm-12 col-md-8 col-lg-7 px-0">
+        <div className="col-sm-12 col-md-8 col-lg-7 px-0 form__wrapper">
           <h3 className="text-center py-4 form-container__title">{title}</h3>
           <div className="px-3">
             {children}
@@ -20,7 +20,7 @@ function FormContainer({ title, children }) {
               <Link className="ml-2" to="/login">Login</Link>
             </div>
           ) : (
-            <div className="my-3 px-3">
+            <div className="my-3 px-3 form__footer">
               <span>Do not have an account?</span>
               <Link className="ml-2" to="/register">Register</Link>
             </div>
