@@ -5,6 +5,7 @@ import {
 import "react-circular-progressbar/dist/styles.css";
 import Header from "../components/Header";
 import Card from '../components/Card';
+import Footer from '../components/Footer';
 
 const Measurement = () => {
   return (
@@ -37,7 +38,7 @@ const Measurement = () => {
         <Card />
         <Card />
       </div>
-      
+      <Footer />
     </div>
   )
 }

@@ -1,10 +1,13 @@
-import React from 'react'
+import { AiOutlinePlus } from 'react-icons/ai'
 
 const Footer = () => {
+  const clickHandler = () => {
+    console.log('Clicked')
+  }
   return (
-    <div >
-      
-    </div>
+    <footer className="d-flex align-items-center justify-content-center footer">
+      <span className="plus-icon"><AiOutlinePlus onClick={clickHandler} /></span>
+    </footer>
   )
 }
 
