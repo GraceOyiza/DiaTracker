@@ -108,7 +108,7 @@ const Register = () => {
 
   return (
     <div className="max-width">
-      <Header />
+      <Header hide />
       <FormContainer title="Register">
         <Form handleSubmit={handleSubmit(handleFormSubmit)}>
           <div className="form-group">

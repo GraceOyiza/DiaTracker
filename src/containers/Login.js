@@ -42,7 +42,7 @@ const Login = () => {
   };
   return (
     <div className="max-width">
-      <Header />
+      <Header hide />
       <FormContainer title="Login">
         <Form handleSubmit={handleSubmit(handleOnsubmit)}>
           <div className="form-group">

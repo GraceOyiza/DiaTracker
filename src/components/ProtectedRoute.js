@@ -9,7 +9,7 @@ const ProtectedRoute = ({ Component, ...rest }) => {
   const headers = getHeaders();
   if (!headers || !Object.keys(headers).length) {
     toast.error('You need to log in');
-    return <Redirect to="login" />;
+    return <Redirect to="/login" />;
   }
   return (
     <Route
