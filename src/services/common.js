@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import { localStorageKey } from './constants';
 
 export const getHeaders = () => (
@@ -40,4 +40,4 @@ export const isYesterday = (date) => {
 && (currentDate.getDate() - 1) === compareDate.getDate();
 };
 
-export const formatDate = (date) => format(new Date(date), 'MMM d yyyy');
+export const formatDate = (date) => format(parseISO(date), 'MMM d yyyy');
