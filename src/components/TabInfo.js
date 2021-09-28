@@ -15,7 +15,7 @@ const TabInfo = ({
   const dispatch = useDispatch();
 
   const handleClick = async () => {
-    const reading = readings.find((measure) => measure.id === id);
+    const reading = readings.find((measure) => measure.id === parseInt(id, 10));
     dispatch(setReading(reading));
   };
   return (
