@@ -4,6 +4,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import FormContainer from './FormContainer';
 import Form from '../components/Form';
+import { addMeasure } from '../services/request';
+import { useHistory } from 'react-router';
 // import { login  } from '../reducers/userSlice';
 
 const schema = yup.object().shape({
@@ -13,6 +15,7 @@ const schema = yup.object().shape({
 });
 
 const MeasureForm = () => {
+  const history = useHistory();
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
     mode: 'onBlur',
@@ -21,12 +24,13 @@ const MeasureForm = () => {
   const handleOnsubmit = async userObj => {
     const { title, unit, goal } = userObj;
 
-    const userData = new FormData();
+    const measureData = new FormData();
 
-    userData.append('title', title);
-    userData.append('goal', goal);
-    userData.append('unit', unit);
-    // login(userData);
+    measureData.append('title', title);
+    measureData.append('goal', goal);
+    measureData.append('unit', unit);
+    await addMeasure(measureData);
+    history.push('/dashboard');
   };
   return (
     <div className="measure__form">
@@ -39,7 +43,7 @@ const MeasureForm = () => {
         </div>
         <div className="form-group">
           <span>Goal</span>
-          <input { ...register("goal") } type="number" className="form-control" id="goal" name="goal" />
+          <input { ...register("goal") } type="number" className="form-control" id="goal" name="goal" step="0.01" />
           <small className="text-danger">{errors?.goal?.message}</small>
         </div>
         <div className="form-group">

@@ -22,7 +22,6 @@ instance.interceptors.request.use(
       config.headers.uid = uid || '';
       config.headers.client = client || '';
       config.headers['token-type'] = tokenType || '';
-      console.log('Instance', config)
     }
     return config;
   },
@@ -104,6 +103,15 @@ export const addMeasure = async (formData) => {
 export const addMeasurement = async (formData, id) => {
   try {
     const res = await postRequest(`${baseApi}/measures/${id}/new`, formData)
+    return res.data;
+  } catch (error) {
+    loginHandleError(error)
+  }
+}
+
+export const getUser = async () => {
+  try {
+    const res = await instance.get(`${baseApi}/me`);
     return res.data;
   } catch (error) {
     loginHandleError(error)

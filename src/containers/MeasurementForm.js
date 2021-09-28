@@ -32,7 +32,7 @@ const MeasurementForm = () => {
       <Form handleSubmit={handleSubmit(handleOnsubmit)}>
         <div className="form-group">
           <span>Value</span>
-          <input { ...register("value") } type="number" className="form-control" id="value" name="value" />
+          <input { ...register("value") } type="number" className="form-control" id="value" step="0.01" name="value" />
           <small className="text-danger">{errors?.value?.message}</small>
         </div>
         <div className="form-group">

@@ -43,21 +43,20 @@ export const createMeasurement = createAsyncThunk(
 export const measurementSlice = createSlice({
   name: 'measurements',
   initialState,
-  extraReducers: (builder) => {
-    builder
-      .addCase(getReading.fulfilled, (state, { payload }) => {
-        state.measurement = payload;
-      })
-      .addCase(getReadings.fulfilled, (state, { payload }) => {
-        state.measurements = payload;
-      })
-      .addCase(createMeasure.fulfilled, (state, { payload }) => {
-        state.measurements = payload;
-      });
-  },
+  reducers: {
+    setReadings: (state, { payload }) => {
+      state.measurements = payload;
+    },
+    setReading: (state, { payload }) => {
+      state.measurement = payload;
+    }
+  }
   
 });
-export const selectReading = (state) => state.reading;
-export const selectReadings = (state) => state.readings;
+
+export const { setReading, setReadings } = measurementSlice.actions;
+
+export const selectReading = (state) => state.measurement.measurement;
+export const selectReadings = (state) => state.measurement.measurements;
 
 export default measurementSlice.reducer;
