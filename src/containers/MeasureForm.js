@@ -35,7 +35,7 @@ const MeasureForm = () => {
   };
   return (
     <div className="measure__form">
-      <FormContainer title="Current Measurement">
+      <FormContainer title="What do you want to measure?">
         <Form handleSubmit={handleSubmit(handleOnsubmit)}>
           <div className="form-group">
             <span>Title</span>
