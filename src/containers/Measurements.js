@@ -43,7 +43,7 @@ const Measurements = () => {
         title,
         percentage,
         unit,
-        id,
+        id: id.toString(),
       };
       const today = new Date();
       if (isToday(new Date(relativeDate), today)) {

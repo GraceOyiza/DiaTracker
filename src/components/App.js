@@ -12,23 +12,19 @@ import MeasurementForm from '../containers/MeasurementForm';
 import ProtectedRoute from './ProtectedRoute';
 import 'react-toastify/dist/ReactToastify.css';
 
-import './App.css';
-
-function App() {
-  return (
-    <Router>
-      <ToastContainer />
-      <Switch>
-        <Route exact path="/" component={Homepage} />
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/login" component={Login} />
-        <ProtectedRoute exact path="/dashboard" Component={Dashboard} />
-        <ProtectedRoute exact path="/measurements/:id" Component={Measurement} />
-        <ProtectedRoute exact path="/measurements/categories/new" Component={MeasureForm} />
-        <ProtectedRoute exact path="/measurements/:id/new" Component={MeasurementForm} />
-      </Switch>
-    </Router>
-  );
-}
+const App = () => (
+  <Router>
+    <ToastContainer />
+    <Switch>
+      <Route exact path="/" component={Homepage} />
+      <Route exact path="/register" component={Register} />
+      <Route exact path="/login" component={Login} />
+      <ProtectedRoute exact path="/dashboard" Component={Dashboard} />
+      <ProtectedRoute exact path="/measurements/:id" Component={Measurement} />
+      <ProtectedRoute exact path="/measurements/categories/new" Component={MeasureForm} />
+      <ProtectedRoute exact path="/measurements/:id/new" Component={MeasurementForm} />
+    </Switch>
+  </Router>
+);
 
 export default App;
