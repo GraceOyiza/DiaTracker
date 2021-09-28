@@ -1,35 +1,36 @@
 import { IoIosArrowForward } from 'react-icons/io';
+import { format } from 'date-fns';
 import {
   CircularProgressbar,
   buildStyles
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-const TabInfo = () => {
-  return (
-    <div className="d-flex align-items-center justify-content-between px-4 py-3 tab-content">
+const TabInfo = ({ percentage, title, date, unit }) => {
+    return (
+      <div className="d-flex align-items-center justify-content-between px-4 py-3 tab-content">
         <div className="d-flex align-items-center">
           <div className="circle-range me-2">
             <CircularProgressbar
-              value={60}
-              strokeWidth={3}
+              value={percentage}
+              strokeWidth={5}
               styles={buildStyles({
                 textColor: "red",
-                pathColor: "turquoise",
-                trailColor: "gold"
+                pathColor: "#97E493",
+                trailColor: "#999999"
               })}
             />
           </div>
           <div className="d-flex flex-column justify-content-between measure-info">
-            <h4 className="date">Sept 5 2013</h4>
-            <small className="percentage"> <span className="measure-type">Body fat</span> <span className="measure-value">-4%</span></small>
+            <h4 className="date">{format(new Date(date), 'MMM d yyyy')}</h4>
+            <small className="percentage"> <span className="measure-type">{title}</span> <span className="measure-value">{percentage}</span></small>
           </div>
         </div>
         <div className="d-flex align-items-center">
-          <p>-0.4kg <IoIosArrowForward /></p>
+          <p>{percentage} {unit} <IoIosArrowForward /></p>
         </div>
       </div>
-  )
+    )
 }
 
 export default TabInfo

@@ -3,9 +3,11 @@ import Header from '../components/Header';
 import { selectReadings } from '../reducers/readingSlice';
 import { setReadings } from '../reducers/readingSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import { isThisWeek, getISOWeek } from 'date-fns';
 import { useEffect } from 'react';
 import { getUser } from '../services/request';
 import Footer from '../components/Footer';
+import { isToday, isYesterday } from '../services/common';
 
 const Measurements = () => {
   const readings = useSelector(selectReadings);
@@ -17,19 +19,56 @@ const Measurements = () => {
     }
     fetchUser();
   }, []);
-  let content = <h3>Add Measurements To See Them Here.</h3>
-  console.log(readings, 'out')
+  // let content = <h3>Add Measurements To See Them Here.</h3>
+  const todayItems = [];
+  const yesterdayItems = [];
+  const thisWeekItems = [];
+  const lastWeekItems = [];
+  const previousItems = [];
 
   if(readings?.length) {
-    console.log(readings, 'in')
-    content = readings.map((reading) => (<Tab />))
+    readings.forEach((reading) => {
+      const { measurements, title, unit, goal } = reading;
+      let relativeDate = reading.updated_at;
+      const measurementsLength = measurements.length;
+      if(measurementsLength) {
+        relativeDate = measurements[measurementsLength - 1].updated_at;
+      }
+      let percentage = 0;
+      if(measurements[measurementsLength - 1]) {
+        percentage = (measurements[measurementsLength - 1].value / goal);
+      }
+      const res = {
+        date: relativeDate,
+        title: title,
+        percentage,
+        unit: unit
+      }
+      const today = new Date();
+      if(isToday(new Date(relativeDate), today)) {
+        todayItems.push(res)
+      } else if (isYesterday(relativeDate)) {
+        yesterdayItems.push(res)
+      } else if (isThisWeek(new Date(relativeDate))) {
+        thisWeekItems.push(res);
+      } else if((getISOWeek(today) - getISOWeek(relativeDate)) === 1) {
+        lastWeekItems.push(res)
+      } else {
+        previousItems.push(res);
+      }
+      return [];
+    });
   }
   
   return (
     <div className="measurements">
       <Header />
       <div className="tabs">
-        { content }       
+        <Tab title="Today" res={todayItems} />      
+        <Tab title="Yesterday" res={yesterdayItems} />      
+        <Tab title="This week" res={thisWeekItems} />      
+        <Tab title="Last Week" res={lastWeekItems} />      
+        <Tab title="Previous" res={previousItems} />      
       </div>
       <Footer url='/measurements/categories/new' />
     </div>

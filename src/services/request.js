@@ -28,13 +28,13 @@ instance.interceptors.request.use(
   error => Promise.reject(error),
 );
 
-const handleError = error => {
-  if (error?.response?.status === 401 || error?.response?.status === 422) {
-    error.response.data.errors.full_messages.forEach(msg => {toast.error(msg)});
-  } else {
-    toast.error('Server error. Please try again later');
-  }
-};
+// const handleError = error => {
+//   if (error?.response?.status === 401 || error?.response?.status === 422) {
+//     error.response.data.errors.full_messages.forEach(msg => {toast.error(msg)});
+//   } else {
+//     toast.error('Server error. Please try again later');
+//   }
+// };
 
 const loginHandleError = error => {
   if (error?.response?.status === 401 || error?.response?.status === 422) {
