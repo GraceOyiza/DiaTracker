@@ -1,12 +1,15 @@
-import { AiOutlinePlus } from 'react-icons/ai'
-import { Link } from 'react-router-dom'
+import { AiOutlinePlus } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-const Footer = ({ url }) => {
-  return (
-    <footer className="d-flex align-items-center justify-content-center footer">
-      <Link to={url}><span className="plus-icon"><AiOutlinePlus/></span></Link>
-    </footer>
-  )
-}
+const Footer = ({ url }) => (
+  <footer className="d-flex align-items-center justify-content-center footer">
+    <Link to={url}><span className="plus-icon"><AiOutlinePlus /></span></Link>
+  </footer>
+);
 
-export default Footer
+Footer.propTypes = {
+  url: PropTypes.string.isRequired,
+};
+
+export default Footer;

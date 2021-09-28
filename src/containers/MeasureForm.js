@@ -1,11 +1,12 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router';
 import FormContainer from './FormContainer';
 import Form from '../components/Form';
 import { addMeasure } from '../services/request';
-import { useHistory } from 'react-router';
 // import { login  } from '../reducers/userSlice';
 
 const schema = yup.object().shape({
@@ -21,7 +22,7 @@ const MeasureForm = () => {
     mode: 'onBlur',
   });
 
-  const handleOnsubmit = async userObj => {
+  const handleOnsubmit = async (userObj) => {
     const { title, unit, goal } = userObj;
 
     const measureData = new FormData();
@@ -35,27 +36,27 @@ const MeasureForm = () => {
   return (
     <div className="measure__form">
       <FormContainer title="Current Measurement">
-      <Form handleSubmit={handleSubmit(handleOnsubmit)}>
-        <div className="form-group">
-          <span>Title</span>
-          <input { ...register("title") } type="title" className="form-control" id="title" name="title" />
-          <small className="text-danger">{errors?.title?.message}</small>
-        </div>
-        <div className="form-group">
-          <span>Goal</span>
-          <input { ...register("goal") } type="number" className="form-control" id="goal" name="goal" step="0.01" />
-          <small className="text-danger">{errors?.goal?.message}</small>
-        </div>
-        <div className="form-group">
-          <span>Unit</span>
-          <input { ...register("unit") } type="text" className="form-control" id="unit" name="unit" />
-          <small className="text-danger">{errors?.unit?.message}</small>
-        </div>
-        <button type="submit" className="btn btn-primary mt-4">Submit</button>
-      </Form>
-    </FormContainer>
+        <Form handleSubmit={handleSubmit(handleOnsubmit)}>
+          <div className="form-group">
+            <span>Title</span>
+            <input {...register('title')} type="title" className="form-control" id="title" name="title" />
+            <small className="text-danger">{errors?.title?.message}</small>
+          </div>
+          <div className="form-group">
+            <span>Goal</span>
+            <input {...register('goal')} type="number" className="form-control" id="goal" name="goal" step="0.01" />
+            <small className="text-danger">{errors?.goal?.message}</small>
+          </div>
+          <div className="form-group">
+            <span>Unit</span>
+            <input {...register('unit')} type="text" className="form-control" id="unit" name="unit" />
+            <small className="text-danger">{errors?.unit?.message}</small>
+          </div>
+          <button type="submit" className="btn btn-primary mt-4">Submit</button>
+        </Form>
+      </FormContainer>
     </div>
-  )
-}
+  );
+};
 
-export default MeasureForm
+export default MeasureForm;

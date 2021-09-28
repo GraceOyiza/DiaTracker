@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
@@ -8,11 +9,11 @@ const instance = axios.create({
   baseURL: baseApi,
   headers: {
     'Content-Type': 'application/json',
-  }
+  },
 });
 
 instance.interceptors.request.use(
-  config => {
+  (config) => {
     const header = getHeaders();
     if (header) {
       const {
@@ -25,20 +26,12 @@ instance.interceptors.request.use(
     }
     return config;
   },
-  error => Promise.reject(error),
+  (error) => Promise.reject(error),
 );
 
-// const handleError = error => {
-//   if (error?.response?.status === 401 || error?.response?.status === 422) {
-//     error.response.data.errors.full_messages.forEach(msg => {toast.error(msg)});
-//   } else {
-//     toast.error('Server error. Please try again later');
-//   }
-// };
-
-const loginHandleError = error => {
+const loginHandleError = (error) => {
   if (error?.response?.status === 401 || error?.response?.status === 422) {
-    error.response.data.errors.forEach(msg => {console.log(msg);toast.error(msg)});
+    error.response.data.errors.forEach((msg) => { toast.error(msg); });
   } else {
     toast.error('Server error. Please try again later');
   }
@@ -50,16 +43,16 @@ export const postRequest = async (url, body) => {
 };
 
 export const signup = async (formData) => {
-    const res = await postRequest(`${baseApi}/auth`, formData)
-    setHeaders(res.headers)
-    return res.data.data;
-}
+  const res = await postRequest(`${baseApi}/auth`, formData);
+  setHeaders(res.headers);
+  return res.data.data;
+};
 
 export const signIn = async (formData) => {
-    const res = await postRequest(`${baseApi}/auth/sign_in`, formData)
-    setHeaders(res.headers)
-    return res.data.data;
-}
+  const res = await postRequest(`${baseApi}/auth/sign_in`, formData);
+  setHeaders(res.headers);
+  return res.data.data;
+};
 
 export const logOut = async () => {
   try {
@@ -67,53 +60,52 @@ export const logOut = async () => {
     toast.success('You have successfully logged out');
     clearHeaders();
   } catch (error) {
-    console.log(error, error.response.data.errors.full_messages)
     error.status = 500;
-    loginHandleError(['An error ocurred'])
+    loginHandleError(['An error ocurred']);
   }
-}
+};
 
 export const fetchMeasurements = async () => {
   try {
-    const res = await instance.get(`${baseApi}/measures`)
+    const res = await instance.get(`${baseApi}/measures`);
     return res.data;
   } catch (error) {
-    loginHandleError(error)
+    return loginHandleError(error);
   }
-}
+};
 
 export const fetchMeasurement = async (id = 2) => {
   try {
-    const res = await instance.get(`${baseApi}/measures/${id}`)
+    const res = await instance.get(`${baseApi}/measures/${id}`);
     return res.data;
   } catch (error) {
-    loginHandleError(error)
+    return loginHandleError(error);
   }
-}
+};
 
 export const addMeasure = async (formData) => {
   try {
-    const res = await postRequest(`${baseApi}/measures`, formData)
+    const res = await postRequest(`${baseApi}/measures`, formData);
     return res.data;
   } catch (error) {
-    loginHandleError(error)
+    return loginHandleError(error);
   }
-}
+};
 
 export const addMeasurement = async (formData, id) => {
   try {
-    const res = await postRequest(`${baseApi}/measures/${id}/new`, formData)
+    const res = await postRequest(`${baseApi}/measures/${id}/new`, formData);
     return res.data;
   } catch (error) {
-    loginHandleError(error)
+    return loginHandleError(error);
   }
-}
+};
 
 export const getUser = async () => {
   try {
     const res = await instance.get(`${baseApi}/me`);
     return res.data;
   } catch (error) {
-    loginHandleError(error)
+    return loginHandleError(error);
   }
-}
+};

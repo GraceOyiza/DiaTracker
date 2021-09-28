@@ -1,3 +1,5 @@
+/* eslint-disable func-names */
+/* eslint-disable react/jsx-props-no-spreading */
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useHistory } from 'react-router-dom';
@@ -12,8 +14,6 @@ import { registerSuccess } from '../reducers/userSlice';
 import { signup } from '../services/request';
 import { clearHeaders } from '../services/common';
 import Header from '../components/Header';
-
-
 
 const SUPPORTED_FORMATS = ['image/jpg',
   'image/jpeg',
@@ -35,18 +35,18 @@ const schema = yup.object().shape({
 
   image: yup.mixed()
     .when('isTrainer', {
-      is: isTrainer => !!isTrainer,
+      is: (isTrainer) => !!isTrainer,
       then: yup.mixed().required('Avatar is required'),
       otherwise: yup.mixed()
         .test(
           'fileSize',
           'File too large',
-          value => !value[0] || (value[0] && value[0]?.size <= FILE_SIZE),
+          (value) => !value[0] || (value[0] && value[0]?.size <= FILE_SIZE),
         )
         .test(
           'fileFormat',
           'Unsupported Format',
-          value => !value[0] || (value && SUPPORTED_FORMATS.includes(value[0]?.type)),
+          (value) => !value[0] || (value && SUPPORTED_FORMATS.includes(value[0]?.type)),
         ),
     }),
 
@@ -61,7 +61,7 @@ const schema = yup.object().shape({
 const Register = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { handleSubmit, register, formState: { errors }  } = useForm({
+  const { handleSubmit, register, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
     mode: 'onBlur',
   });
@@ -72,7 +72,7 @@ const Register = () => {
     return new File([blob], fileName, { type: 'image/png' });
   };
 
-  const handleFormSubmit = async data => {
+  const handleFormSubmit = async (data) => {
     const {
       firstName, lastName, email, password, username, image,
     } = data;
@@ -85,79 +85,79 @@ const Register = () => {
     userData.append('password', password);
     userData.append('username', username);
 
-      const imgFile = await dataUrlToFile(DefaultUserImage, 'defaultImage');
-      if (!image[0]) {
-        userData.append('avatar', imgFile);
+    const imgFile = await dataUrlToFile(DefaultUserImage, 'defaultImage');
+    if (!image[0]) {
+      userData.append('avatar', imgFile);
+    } else {
+      userData.append('avatar', image[0]);
+    }
+    try {
+      const res = await signup(userData);
+      dispatch(registerSuccess(res));
+      history.push('/dashboard');
+      toast.success('Account created successfully');
+    } catch (error) {
+      clearHeaders();
+      if (error.response.status === 422) {
+        error.response.data.errors.full_messages.forEach((msg) => toast.error(msg));
       } else {
-        userData.append('avatar', image[0]);
+        toast.error('Server error. Please try again later');
       }
-      try {
-        const res = await signup(userData);
-        dispatch(registerSuccess(res))
-        history.push('/dashboard');
-        toast.success('Account created successfully');
-      } catch (error) {
-        clearHeaders();
-        if (error.response.status === 422) {
-          error.response.data.errors.full_messages.forEach(msg => toast.error(msg));
-        } else {
-          toast.error('Server error. Please try again later');
-        }
-      } 
+    }
   };
 
   return (
     <div className="max-width">
       <Header />
       <FormContainer title="Register">
-      <Form handleSubmit={handleSubmit(handleFormSubmit)}>
-        <div className="form-group">
-          <span>First name</span>
-          <input
-            {...register("firstName")}
-            type="text"
-            className="form-control"
-            id="firstName"
-            name="firstName"
-          />
-          <small className="text-danger">{errors?.firstName?.message}</small>
-        </div>
-        <div className="form-group">
-          <span>Last name</span>
-          <input {...register("lastName")} type="text" className="form-control" id="lastName" name="lastName" />
-          <small className="text-danger">{errors?.lastName?.message}</small>
-        </div>
-        <div className="form-group">
-          <span>Email address</span>
-          <input {...register("email")} type="email" className="form-control" id="email" name="email" />
-          <small className="text-danger">{errors?.email?.message}</small>
-        </div>
-        <div className="form-group">
-          <span>Username</span>
-          <input {...register("username")} type="text" className="form-control" id="username" name="username" />
-          <small className="text-danger">{errors?.username?.message}</small>
-        </div>
-        <div className="form-group">
-          <span>Password</span>
-          <input {...register("password")} type="password" className="form-control" id="password" name="password" />
-          <small className="text-danger">{errors?.password?.message}</small>
-        </div>
-        <div className="form-group">
-          <span>Confirm Pasword</span>
-          <input {...register("confirmPassword")} type="password" className="form-control" id="confirmPassword" name="confirmPassword" />
-          <small className="text-danger">{errors?.confirmPassword?.message}</small>
-        </div>
+        <Form handleSubmit={handleSubmit(handleFormSubmit)}>
+          <div className="form-group">
+            <span>First name</span>
+            <input
+              {...register('firstName')}
+              type="text"
+              className="form-control"
+              id="firstName"
+              name="firstName"
+            />
+            <small className="text-danger">{errors?.firstName?.message}</small>
+          </div>
+          <div className="form-group">
+            <span>Last name</span>
+            <input {...register('lastName')} type="text" className="form-control" id="lastName" name="lastName" />
+            <small className="text-danger">{errors?.lastName?.message}</small>
+          </div>
+          <div className="form-group">
+            <span>Email address</span>
+            <input {...register('email')} type="email" className="form-control" id="email" name="email" />
+            <small className="text-danger">{errors?.email?.message}</small>
+          </div>
+          <div className="form-group">
+            <span>Username</span>
+            <input {...register('username')} type="text" className="form-control" id="username" name="username" />
+            <small className="text-danger">{errors?.username?.message}</small>
+          </div>
+          <div className="form-group">
+            <span>Password</span>
+            <input {...register('password')} type="password" className="form-control" id="password" name="password" />
+            <small className="text-danger">{errors?.password?.message}</small>
+          </div>
+          <div className="form-group">
+            <span>Confirm Pasword</span>
+            <input {...register('confirmPassword')} type="password" className="form-control" id="confirmPassword" name="confirmPassword" />
+            <small className="text-danger">{errors?.confirmPassword?.message}</small>
+          </div>
 
-        <div className="custom-file">
-          <span>Select Avatar</span>
-          <input {...register("image")} type="file" name="image" className="form-control-file" id="image" placeholder="Choose Avatar" />
-          <small className="text-danger">{errors?.image?.message}</small>
-        </div>
-        <button type="submit" className="btn btn-primary mt-4">Submit</button>
-      </Form>
-    </FormContainer>
+          <div className="custom-file">
+            <span>Select Avatar</span>
+            <input {...register('image')} type="file" name="image" className="form-control-file" id="image" placeholder="Choose Avatar" />
+            <small className="text-danger">{errors?.image?.message}</small>
+          </div>
+          <button type="submit" className="btn btn-primary mt-4">Submit</button>
+        </Form>
+      </FormContainer>
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;

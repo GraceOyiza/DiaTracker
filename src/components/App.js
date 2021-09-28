@@ -2,14 +2,14 @@ import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import Homepage from './components/Homepage';
-import Register from './containers/Register';
-import Login from './containers/Login';
-import Dashboard from './containers/Measurements';
-import Measurement from './containers/Measurement';
-import MeasureForm from './containers/MeasureForm';
-import MeasurementForm from './containers/MeasurementForm';
-import ProtectedRoute from './components/ProtectedRoute';
+import Homepage from './Homepage';
+import Register from '../containers/Register';
+import Login from '../containers/Login';
+import Dashboard from '../containers/Measurements';
+import Measurement from '../containers/Measurement';
+import MeasureForm from '../containers/MeasureForm';
+import MeasurementForm from '../containers/MeasurementForm';
+import ProtectedRoute from './ProtectedRoute';
 import 'react-toastify/dist/ReactToastify.css';
 
 import './App.css';

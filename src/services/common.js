@@ -1,7 +1,9 @@
-import { localStorageKey } from './constants';
 import { format } from 'date-fns';
+import { localStorageKey } from './constants';
 
-export const getHeaders = () => localStorage.getItem(localStorageKey) ? JSON.parse(localStorage.getItem(localStorageKey)) : null
+export const getHeaders = () => (
+  localStorage.getItem(localStorageKey) ? JSON.parse(localStorage.getItem(localStorageKey)) : null
+);
 export const setHeaders = (data) => {
   const { uid, client, expiry } = data;
   const body = {
@@ -9,16 +11,15 @@ export const setHeaders = (data) => {
     tokenType: data['token-type'],
     uid,
     client,
-    expiry
-  }
-  localStorage.setItem(localStorageKey, JSON.stringify(body))
-}
+    expiry,
+  };
+  localStorage.setItem(localStorageKey, JSON.stringify(body));
+};
 export const clearHeaders = () => localStorage.removeItem(localStorageKey);
 
-export const isToday = (first, second) =>
-first.getFullYear() === second.getFullYear() &&
-first.getMonth() === second.getMonth() &&
-first.getDate() === second.getDate();
+export const isToday = (first, second) => first.getFullYear() === second.getFullYear()
+&& first.getMonth() === second.getMonth()
+&& first.getDate() === second.getDate();
 
 export const isDateInThisWeek = (date) => {
   const todayObj = new Date();
@@ -29,14 +30,14 @@ export const isDateInThisWeek = (date) => {
   lastDayOfWeek.setDate(lastDayOfWeek.getDate() + 6);
 
   return date >= firstDayOfWeek && date <= lastDayOfWeek;
-}
+};
 
 export const isYesterday = (date) => {
   const currentDate = new Date();
   const compareDate = new Date(date);
-  return currentDate.getFullYear() === compareDate.getFullYear() &&
-currentDate.getMonth() === compareDate.getMonth() &&
-(currentDate.getDate() - 1) === compareDate.getDate();
-}
+  return currentDate.getFullYear() === compareDate.getFullYear()
+&& currentDate.getMonth() === compareDate.getMonth()
+&& (currentDate.getDate() - 1) === compareDate.getDate();
+};
 
-export const formatDate = (date) => format(new Date(date), 'MMM d yyyy')
+export const formatDate = (date) => format(new Date(date), 'MMM d yyyy');

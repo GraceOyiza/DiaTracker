@@ -1,10 +1,13 @@
+/* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchMeasurement, fetchMeasurements, addMeasure, addMeasurement } from '../services/request';
-import { SET_READING, SET_READINGS, CREATE_READING } from '../actions/types'
+import {
+  fetchMeasurement, fetchMeasurements, addMeasure, addMeasurement,
+} from '../services/request';
+import { SET_READING, SET_READINGS, CREATE_READING } from '../actions/types';
 
 const initialState = {
   measurement: {},
-  measurements: []
+  measurements: [],
 };
 
 export const getReading = createAsyncThunk(
@@ -12,7 +15,7 @@ export const getReading = createAsyncThunk(
   async (id) => {
     const response = await fetchMeasurement(id);
     return response;
-  }
+  },
 );
 
 export const getReadings = createAsyncThunk(
@@ -20,7 +23,7 @@ export const getReadings = createAsyncThunk(
   async () => {
     const response = await fetchMeasurements();
     return response;
-  }
+  },
 );
 
 export const createMeasure = createAsyncThunk(
@@ -28,7 +31,7 @@ export const createMeasure = createAsyncThunk(
   async (formData) => {
     const response = await addMeasure(formData);
     return response;
-  }
+  },
 );
 
 export const createMeasurement = createAsyncThunk(
@@ -37,7 +40,7 @@ export const createMeasurement = createAsyncThunk(
     const { formData, id } = data;
     const response = await addMeasurement(formData, id);
     return response;
-  }
+  },
 );
 
 export const measurementSlice = createSlice({
@@ -49,9 +52,9 @@ export const measurementSlice = createSlice({
     },
     setReading: (state, { payload }) => {
       state.measurement = payload;
-    }
-  }
-  
+    },
+  },
+
 });
 
 export const { setReading, setReadings } = measurementSlice.actions;
