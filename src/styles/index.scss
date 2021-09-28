@@ -1,7 +1,12 @@
+@import url('http://fonts.cdnfonts.com/css/helvetica-neue-9');
 @import '~bootstrap/scss/bootstrap.scss';
 @import './variables.scss';
 @import './Homepage.scss';
 @import './Register.scss';
+
+* {
+  font-family: 'Helvetica Neue', sans-serif !important;
+}
 
 .measurements {
   max-width: 420px;
@@ -105,4 +110,21 @@
 
 .btn-primary {
   background-color: $light-blue;
+}
+
+a {
+  color: $text-color;
+  text-decoration: none;
+
+  &:visited {
+    color: $text-color;
+  }
+}
+
+.logout-btn {
+  border: none;
+  bottom: 7px;
+  position: absolute;
+  right: 10px;
+  background: transparent;
 }
