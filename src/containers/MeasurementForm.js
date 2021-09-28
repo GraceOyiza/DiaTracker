@@ -3,7 +3,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import FormContainer from './FormContainer';
 import Form from '../components/Form';
-// import { login  } from '../reducers/userSlice';
+import { addMeasurement } from '../services/request';
+import { useHistory, useParams } from 'react-router';
 
 const schema = yup.object().shape({
   value: yup.string().required('Measurement is required'),
@@ -11,20 +12,23 @@ const schema = yup.object().shape({
 });
 
 const MeasurementForm = () => {
+  const { id } = useParams();
+  console.log(id)
+  const history = useHistory()
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
     mode: 'onBlur',
   });
 
-  const handleOnsubmit = async userObj => {
-    const { title, unit, goal } = userObj;
+  const handleOnsubmit = async measurementObj => {
+    const { value, date } = measurementObj;
 
-    const userData = new FormData();
+    const measurementData = new FormData();
 
-    userData.append('value', title);
-    userData.append('date', goal);
-    userData.append('unit', unit);
-    // login(userData);
+    measurementData.append('value', value);
+    measurementData.append('date', date);
+    await addMeasurement(measurementData, id)
+    history.goBack(); 
   };
   return (
     <div className="measure__form">

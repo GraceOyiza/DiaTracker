@@ -9,6 +9,7 @@ import { signIn  } from '../services/request';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useHistory } from 'react-router';
+import Header from '../components/Header';
 
 const schema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Email is required'),
@@ -39,7 +40,9 @@ const Login = () => {
     }
   };
   return (
-    <FormContainer title="Login">
+    <div className="max-width">
+      <Header />
+      <FormContainer title="Login">
       <Form handleSubmit={handleSubmit(handleOnsubmit)}>
         <div className="form-group">
           <span>Email address</span>
@@ -51,9 +54,10 @@ const Login = () => {
           <input { ...register("password") } type="password" className="form-control" id="password" name="password" />
           <small className="text-danger">{errors?.password?.message}</small>
         </div>
-        <button type="submit" className="btn btn-primary">Submit</button>
+        <button type="submit" className="btn btn-primary mt-4">Submit</button>
       </Form>
     </FormContainer>
+    </div>
   );
 };
 

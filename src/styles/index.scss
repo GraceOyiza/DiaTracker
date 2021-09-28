@@ -88,3 +88,24 @@
     width: 100%;
   }
 }
+
+.measurement__card {
+  width: 46%;
+  text-align: right;
+
+  p {
+    width: 100%;
+  }
+}
+
+.form-container__image {
+  display: none;
+}
+.max-width {
+  max-width: 420px;
+  margin: auto;
+}
+
+.btn-primary {
+  background-color: $light-blue;
+}

@@ -1,4 +1,5 @@
 import { localStorageKey } from './constants';
+import { format } from 'date-fns';
 
 export const getHeaders = () => localStorage.getItem(localStorageKey) ? JSON.parse(localStorage.getItem(localStorageKey)) : null
 export const setHeaders = (data) => {
@@ -37,3 +38,5 @@ export const isYesterday = (date) => {
 currentDate.getMonth() === compareDate.getMonth() &&
 (currentDate.getDate() - 1) === compareDate.getDate();
 }
+
+export const formatDate = (date) => format(new Date(date), 'MMM d yyyy')

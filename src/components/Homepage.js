@@ -1,8 +1,14 @@
 import BgImage from '../assets/hompageBg.jpeg';
 import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router';
+import { getHeaders } from '../services/common';
 
 
 const Homepage = () => {
+  const headers = getHeaders();
+  if(headers) {
+    return <Redirect to="/dashboard" />
+  }
   return (
     <div>
       <div className="homepage">

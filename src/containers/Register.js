@@ -11,6 +11,7 @@ import Form from '../components/Form';
 import { registerSuccess } from '../reducers/userSlice';
 import { signup } from '../services/request';
 import { clearHeaders } from '../services/common';
+import Header from '../components/Header';
 
 
 
@@ -106,7 +107,8 @@ const Register = () => {
   };
 
   return (
-    <div>
+    <div className="max-width">
+      <Header />
       <FormContainer title="Register">
       <Form handleSubmit={handleSubmit(handleFormSubmit)}>
         <div className="form-group">
@@ -151,7 +153,7 @@ const Register = () => {
           <input {...register("image")} type="file" name="image" className="form-control-file" id="image" placeholder="Choose Avatar" />
           <small className="text-danger">{errors?.image?.message}</small>
         </div>
-        <button type="submit" className="btn btn-primary">Submit</button>
+        <button type="submit" className="btn btn-primary mt-4">Submit</button>
       </Form>
     </FormContainer>
     </div>

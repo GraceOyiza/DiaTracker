@@ -1,15 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import FormImage from '../assets/form-bg.jpeg';
 
 function FormContainer({ title, children }) {
   return (
     <div className="form-container">
       <div className="row mx-0 form-container__wrapper">
-        <div className="col-sm-0 col-md-4 col-lg-5 form-container__image" style={{ backgroundImage: `url(${FormImage})` }} />
-
-        <div className="col-sm-12 col-md-8 col-lg-7 px-0 form__wrapper">
+        <div className="px-0 form__wrapper">
           <h3 className="text-center py-4 form-container__title">{title}</h3>
           <div className="px-3">
             {children}

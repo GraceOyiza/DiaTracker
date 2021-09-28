@@ -19,7 +19,6 @@ const Measurements = () => {
     }
     fetchUser();
   }, []);
-  // let content = <h3>Add Measurements To See Them Here.</h3>
   const todayItems = [];
   const yesterdayItems = [];
   const thisWeekItems = [];
@@ -28,7 +27,7 @@ const Measurements = () => {
 
   if(readings?.length) {
     readings.forEach((reading) => {
-      const { measurements, title, unit, goal } = reading;
+      const { measurements, title, unit, goal, id } = reading;
       let relativeDate = reading.updated_at;
       const measurementsLength = measurements.length;
       if(measurementsLength) {
@@ -42,7 +41,8 @@ const Measurements = () => {
         date: relativeDate,
         title: title,
         percentage,
-        unit: unit
+        unit: unit,
+        id
       }
       const today = new Date();
       if(isToday(new Date(relativeDate), today)) {
