@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { baseApi } from './constants';
 import { getHeaders, setHeaders, clearHeaders } from './common';
 
-const instance = axios.create({
+export const instance = axios.create({
   baseURL: baseApi,
   headers: {
     'Content-Type': 'application/json',
@@ -56,7 +56,6 @@ export const signIn = async (formData) => {
 
 export const logOut = async () => {
   try {
-    // await instance.delete(`${baseApi}/auth/sign_out`);
     toast.success('You have successfully logged out');
     clearHeaders();
   } catch (error) {
