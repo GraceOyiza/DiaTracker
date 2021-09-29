@@ -40,7 +40,4 @@ export const isYesterday = (date) => {
 && (currentDate.getDate() - 1) === compareDate.getDate();
 };
 
-export const formatDate = (date) => {
-  console.log('Date here: ', date);
-  format(parseISO(date), 'MMM d yyyy');
-};
+export const formatDate = (date) => format(parseISO(new Date(date).toISOString()), 'MMM d yyyy');

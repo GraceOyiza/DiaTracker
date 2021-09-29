@@ -29,17 +29,18 @@ const Measurements = () => {
       const {
         measurements, title, unit, goal, id,
       } = reading;
-      let relativeDate = reading.updated_at || new Date();
+      let relativeDate = reading.date_created;
       const measurementsLength = measurements.length;
       if (measurementsLength) {
-        relativeDate = measurements[measurementsLength - 1].updated_at;
+        relativeDate = measurements[measurementsLength - 1].date;
       }
+
       let percentage = 0;
       if (measurements[measurementsLength - 1]) {
         percentage = (measurements[measurementsLength - 1].value / goal);
       }
       const res = {
-        date: relativeDate,
+        date: relativeDate.toLocaleString(),
         title,
         percentage,
         unit,

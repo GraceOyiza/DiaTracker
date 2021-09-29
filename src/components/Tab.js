@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import TabInfo from './TabInfo';
 
 const Tab = ({ title, res }) => {
-  console.log(res, 'Res!');
   const content = res.map((item) => {
     const {
       percentage, date, title, unit, id,
