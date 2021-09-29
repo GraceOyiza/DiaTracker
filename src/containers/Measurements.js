@@ -29,7 +29,7 @@ const Measurements = () => {
       const {
         measurements, title, unit, goal, id,
       } = reading;
-      let relativeDate = reading.updated_at;
+      let relativeDate = reading.updated_at || new Date();
       const measurementsLength = measurements.length;
       if (measurementsLength) {
         relativeDate = measurements[measurementsLength - 1].updated_at;
