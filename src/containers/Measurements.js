@@ -40,7 +40,7 @@ const Measurements = () => {
         percentage = (measurements[measurementsLength - 1].value / goal);
       }
       const res = {
-        date: relativeDate.toLocaleString(),
+        date: relativeDate,
         title,
         percentage,
         unit,
