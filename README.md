@@ -1,44 +1,83 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+# DIA-TRACK
+This is a web application that enables users to check the level of their diabetes by taking. This application serves as a frontend application to consume a [Ruby on Rails API](https://github.com/GraceOyiza/Dia-track-backend).
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `yarn start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Production Dependencies
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+| **Dependency**   | **Use**                                              |
+| ---------------- | ---------------------------------------------------- |
+| prop-types       | Declare types for props passed into React components |
+| react            | React library                                        |
+| react-dom        | React library for DOM rendering                      |
+| react-redux      | Connects React components to Redux                   |
+| react-router-dom | React library for routing                            |
+| redux            | Library for unidirectional data flows                |
+| redux-thunk      | Async redux library middleware                       |
+| axios            | Make HTTP calls                                      |
+| react-chartjs-2  | To create chart                                      |
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<br />
+<br />
 
-### `yarn build`
+### Development Dependencies
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| **Dependency**                  | **Use**                                                          |
+| ------------------------------- | ---------------------------------------------------------------- |
+| babel-eslint                    | Lint modern JavaScript via ESLint                                |
+| eslint                          | Lints JavaScript                                                 |
+| eslint-plugin-react-hooks       | Adds additional React-hooks-related rules to ESLint              |
+| eslint-plugin-import            | Advanced linting of ES6 imports                                  |
+| eslint-plugin-react             | Adds additional React-related rules to ESLint                    |
+| jest                            | Automated testing framework                                      |
+| enzyme                          | Test components, and write assertions                            |
+| enzyme-adapter-react-16         | React adapter for enzyme                                         |
+| stylelint                       | Lints Css                                                        |
+| stylelint-config-standard       | Advanced linting configoration for css                           |
+| stylelint-csstree-validator     | Advanced linting validation for css                              |
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Prerequisites
 
-### `yarn eject`
+- Internet
+- Computer
+## Install and Setup
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Clone repo to your local git clone https://github.com/GraceOyiza/DiaTracker.git
+- cd into the cloned repo
+- Open a terminal in the root of the app
+- Run `npm install- You can access all the design info (color, typography, layouts) in this link:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### To install dependencies
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Run  your server with npm run start
+Open http://localhost:3000/ in your browser.
 
-## Learn More
+### Testing
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Open a terminal and run npm run test.
+## Author
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+👤 **Popoola Grace Boluwatife**
+
+- Github: [@GraceOyiza](https://github.com/GraceOyiza)
+- Twitter: [@\_PopsonGrace](https://twitter.com/_PopsonGrace)
+- LinkedIn: [@grace](https://www.linkedin.com/in/grace-popoola)
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!
+Feel free to check the [issues page](https://github.com/GraceOyiza/DiaTracker/issues).
+## Show your support
+
+Give a ⭐️ if you like this project!
+## Acknowledgments
+
+- Microverse
+- You can access all the design info (color, typography, layouts) at this link:
+- Design(https://www.behance.net/gallery/13271423/Bodytrackit-An-iOs-app-Branding-UX-and-UI)
+- Design idea by Gregoire Vella on Behance
+
+## 📝 License
